@@ -22,7 +22,7 @@ namespace HpTestApp.Controllers
         {
 	        var x = new SimpleTextRepository().Get(11);
 
-            return View(new AboutViewModel { Text = x.Text });
+            return View(new AboutViewModel { Text = x.Text + " + Git source!!!" });
         }
 
         public IActionResult Contact()
