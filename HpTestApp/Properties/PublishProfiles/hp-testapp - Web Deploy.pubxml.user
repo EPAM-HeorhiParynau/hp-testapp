@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAACooKbc/dyUivE4Y2VHzPpwAAAAACAAAAAAADZgAAwAAAABAAAAA2Tgk/9ahF+UjktIlyccO7AAAAAASAAACgAAAAEAAAALKvjB02QvF1pURQrungOJaAAAAASTrrRpBVckif2CNHnpOX2wZZc5Xneo3n+9a2mzVgBjIqdP9Vaum9d4JBfGRbghEl7rWmWRDq8JDnX+IFu6oNhf0/JAIpmqRXDTQPK9xehu8B2F+a2IcI0kMEQ/4RecpD1rfSrKCb0intviBpsWu8x4QMT18+1h9eTXBojt01xH8UAAAAGbNGUjV5xa0i+IFU7qcyvi7UjBY=</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="AzureHpTestApp">
+      <Value>Server=tcp:hp-testapp-sqlserver.database.windows.net,1433;Initial Catalog=hp-testapp-sqldatabase;Persist Security Info=False;User ID=hp;Password=FullMoon124;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>
