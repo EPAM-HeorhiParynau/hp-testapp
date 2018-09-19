@@ -20,9 +20,10 @@ namespace HpTestApp.Controllers
 
         public IActionResult About()
         {
-	        var x = new SimpleTextRepository().Get(11);
+	        var x = new SimpleTextRepository().GetTextValue(12);
+	        var y = new SimpleTextRepository().Get(11);
 
-            return View(new AboutViewModel { Text = x.Text + " + Git source!!!" });
+			return View(new AboutViewModel { Text = x.Value + " + DB project source!!! " + "Git source: " + y.Text });
         }
 
         public IActionResult Contact()
