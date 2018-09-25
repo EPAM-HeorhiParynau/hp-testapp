@@ -16,6 +16,7 @@ namespace HpTestApp.Controllers
 
         public IActionResult About()
         {
+	        throw null;
 	        var x = new SimpleTextRepository().GetTextValue(12);
 	        var y = new SimpleTextRepository().Get(11);
 
