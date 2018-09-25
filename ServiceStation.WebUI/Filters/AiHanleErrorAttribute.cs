@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace ServiceStation.WebUI.Filters
@@ -14,6 +16,7 @@ namespace ServiceStation.WebUI.Filters
 			{
 				var ai = new TelemetryClient();
 				ai.TrackException(context.Exception);
+				ai.Track(new EventTelemetry("TestName") {Timestamp = DateTime.Now, Properties = { new KeyValuePair<string, string>("TestKey", "TestValue")}});
 			}
 			base.OnException(context);
 		}
