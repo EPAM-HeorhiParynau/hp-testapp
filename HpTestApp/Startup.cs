@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +12,11 @@ namespace HpTestApp
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+			//new AzureTableStorageLogger().InsertEntity(new TableLogMessage { Timestamp = DateTime.Now, Message = "AppStart" });
+			//new AzureFileStorageLogger().InsertEntity(new FileLogMessagecs { Timestamp = DateTime.Now, Text = "AppStart" });
+
+	        //new AzureBlobStorageLogger();
         }
 
         public IConfiguration Configuration { get; }
@@ -55,6 +56,10 @@ namespace HpTestApp
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-        }
+
+	        //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+	        //loggerFactory.AddDebug();
+	        //loggerFactory.AddLog4Net(Configuration.GetValue<string>("Log4NetConfigFile:Name"));
+		}
     }
 }
