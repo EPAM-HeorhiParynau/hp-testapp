@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+
+using Microsoft.ApplicationInsights;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,15 +14,17 @@ namespace HpTestApp
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
+	    private readonly IServiceProvider serviceProvider;
+
+	    public Startup(IConfiguration configuration)
+	    {
+		    Configuration = configuration;
 
 			//new AzureTableStorageLogger().InsertEntity(new TableLogMessage { Timestamp = DateTime.Now, Message = "AppStart" });
 			//new AzureFileStorageLogger().InsertEntity(new FileLogMessagecs { Timestamp = DateTime.Now, Text = "AppStart" });
 
 	        //new AzureBlobStorageLogger();
-        }
+	    }
 
         public IConfiguration Configuration { get; }
 
@@ -33,9 +38,11 @@ namespace HpTestApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
 	        });
 
+	        services.AddSingleton<TelemetryClient>();
+	        services.AddSingleton<AiHanleErrorAttribute>();
 
-	        services.AddMvc(options => { options.Filters.Add(new AiHanleErrorAttribute()); })
-		        .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+			services.AddMvc(options => { options.Filters.Add(new AiHanleErrorAttribute(new TelemetryClient())); })
+				.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
