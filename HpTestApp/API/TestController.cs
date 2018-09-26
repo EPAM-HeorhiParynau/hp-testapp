@@ -19,7 +19,7 @@ namespace HpTestApp.API
         }
 
         // GET: api/Test/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
