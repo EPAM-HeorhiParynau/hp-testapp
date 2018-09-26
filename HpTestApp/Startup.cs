@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 using ServiceStation.WebUI.Filters;
 
+using Swashbuckle.AspNetCore.Swagger;
+
 namespace HpTestApp
 {
     public class Startup
@@ -41,6 +43,11 @@ namespace HpTestApp
 	        services.AddSingleton<TelemetryClient>();
 	        services.AddSingleton<AiHanleErrorAttribute>();
 
+	        services.AddSwaggerGen(c =>
+		        {
+			        c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+		        });
+
 			services.AddMvc(options => { options.Filters.Add(new AiHanleErrorAttribute(new TelemetryClient())); })
 				.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -60,7 +67,18 @@ namespace HpTestApp
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseMvc(routes =>
+	        // Enable middleware to serve generated Swagger as a JSON endpoint.
+	        app.UseSwagger();
+
+	        // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+	        // specifying the Swagger JSON endpoint.
+	        app.UseSwaggerUI(c =>
+		        {
+			        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+		        });
+
+
+			app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
